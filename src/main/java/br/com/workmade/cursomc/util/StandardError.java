@@ -12,7 +12,6 @@ public class StandardError implements Serializable{
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Long timeStamp;
 	public StandardError(Integer status, String message, Long timeStamp) {
-		super();
 		this.status = status;
 		this.message = message;
 		this.timeStamp = timeStamp;

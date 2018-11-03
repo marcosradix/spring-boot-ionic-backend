@@ -52,5 +52,11 @@ public class CategoriaResources {
 				 .toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@RequestMapping(method=RequestMethod.DELETE, value="/categorias/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		categoriaService.deletar(id);
+		return ResponseEntity.noContent().build();
+	}
 
 }
