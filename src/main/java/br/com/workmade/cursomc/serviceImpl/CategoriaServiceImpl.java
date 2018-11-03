@@ -34,7 +34,13 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 	@Override
 	public Categoria salvarUm(Categoria categoria) {
-		categoria.setId(null);
+		return categoriaRepository.save(categoria);
+	}
+
+
+	@Override
+	public Categoria atualizar(Categoria categoria) {
+		buscarPorId(categoria.getId());
 		return categoriaRepository.save(categoria);
 	}
 

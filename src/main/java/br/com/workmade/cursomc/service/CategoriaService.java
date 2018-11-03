@@ -14,5 +14,6 @@ public interface CategoriaService {
 	public List<Categoria> salvarTodos(List<Categoria> categorias);
 	
 	public Categoria salvarUm(Categoria categoria);
+	public Categoria atualizar(Categoria categoria);
 	
 }

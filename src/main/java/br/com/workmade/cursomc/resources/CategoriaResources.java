@@ -1,7 +1,6 @@
 package br.com.workmade.cursomc.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +23,6 @@ public class CategoriaResources {
 	@Autowired
 	private CategoriaService categoriaService;
 	
-	/*@Autowired
-	private ProdutoService produtoService;*/
-	
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String teste() {
@@ -39,14 +35,17 @@ public class CategoriaResources {
 		return ResponseEntity.ok().body(categoria);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/maisdeumacategorias")
-	public ResponseEntity<List<Categoria>> saveAll(@RequestBody List<Categoria> categorias) {
-		 categoriaService.salvarTodos(categorias);
-		return ResponseEntity.ok().body(categorias);
+	@RequestMapping(method=RequestMethod.PUT, value="/categorias/{id}")
+	public ResponseEntity<Void> update(@RequestBody Categoria categoria, @PathVariable Integer id) {
+		categoria.setId(id);
+		categoriaService.atualizar(categoria);
+		return ResponseEntity.noContent().build();
 	}
+
 	
 	@RequestMapping(method=RequestMethod.POST, value="/categorias")
 	public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
+		 categoria.setId(null);
 		 categoriaService.salvarUm(categoria);
 		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				 .buildAndExpand(categoria.getId())
