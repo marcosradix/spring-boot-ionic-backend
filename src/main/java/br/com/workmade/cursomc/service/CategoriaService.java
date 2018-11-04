@@ -16,5 +16,6 @@ public interface CategoriaService {
 	public Categoria salvarUm(Categoria categoria);
 	public Categoria atualizar(Categoria categoria);
 	public void deletar(Integer id);
+	public List<Categoria> buscarTodos();
 	
 }

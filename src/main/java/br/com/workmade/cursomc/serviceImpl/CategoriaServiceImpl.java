@@ -59,4 +59,10 @@ public class CategoriaServiceImpl implements CategoriaService {
 		
 	}
 
+
+	@Override
+	public List<Categoria> buscarTodos() {
+		return categoriaRepository.findAll();
+	}
+
 }
