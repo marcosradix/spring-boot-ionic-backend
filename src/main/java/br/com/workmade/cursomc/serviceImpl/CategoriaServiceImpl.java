@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.workmade.cursomc.domain.Categoria;
+import br.com.workmade.cursomc.dto.CategoriaDTO;
 import br.com.workmade.cursomc.repositories.CategoriaRepository;
 import br.com.workmade.cursomc.service.CategoriaService;
 import br.com.workmade.cursomc.service.exceptions.DataIntegrityException;
@@ -73,6 +74,12 @@ public class CategoriaServiceImpl implements CategoriaService {
 	public Page<Categoria> buscarPorPagina(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return categoriaRepository.findAll(pageRequest);
+	}
+
+
+	@Override
+	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
 	}
 
 }
