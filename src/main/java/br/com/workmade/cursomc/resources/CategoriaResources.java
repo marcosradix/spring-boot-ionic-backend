@@ -30,12 +30,6 @@ public class CategoriaResources {
 	@Autowired
 	private CategoriaService categoriaService;
 	
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public String teste() {
-		return "Testado.";
-	}
-	
 	@RequestMapping(method=RequestMethod.GET, value="/categorias/{id}")
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		Categoria categoria = categoriaService.buscarPorId(id);
