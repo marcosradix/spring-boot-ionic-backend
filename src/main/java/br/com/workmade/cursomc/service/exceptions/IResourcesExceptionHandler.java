@@ -11,7 +11,7 @@ import br.com.workmade.cursomc.util.StandardError;
 public interface IResourcesExceptionHandler {
 
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request);
-	public ResponseEntity<StandardError> constraintViolation(DataIntegrityViolationException e, HttpServletRequest request);
+	public ResponseEntity<StandardError> constraintViolation(DataIntegrityException e, HttpServletRequest request);
 	ResponseEntity<StandardError> argumentNotValidException(MethodArgumentNotValidException e,
 			HttpServletRequest request);
 }

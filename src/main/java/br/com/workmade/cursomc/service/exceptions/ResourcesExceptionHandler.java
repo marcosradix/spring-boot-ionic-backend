@@ -25,7 +25,7 @@ public class ResourcesExceptionHandler implements IResourcesExceptionHandler{
 	}
 	@ExceptionHandler(DataIntegrityException.class)
 	@Override
-	public ResponseEntity<StandardError> constraintViolation(DataIntegrityViolationException e,
+	public ResponseEntity<StandardError> constraintViolation(DataIntegrityException e,
 			HttpServletRequest request) {
 		StandardError error = new StandardError(
 				HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
