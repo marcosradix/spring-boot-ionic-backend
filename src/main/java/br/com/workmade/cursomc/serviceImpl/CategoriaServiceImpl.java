@@ -3,7 +3,7 @@ package br.com.workmade.cursomc.serviceImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.jboss.logging.Logger;
+/*import org.jboss.logging.Logger;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -21,7 +21,7 @@ import br.com.workmade.cursomc.service.exceptions.ObjectNotFoundException;
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 	
-	private Logger LOGGER = Logger.getLogger(CategoriaServiceImpl.class);
+	/*private Logger LOGGER = Logger.getLogger(CategoriaServiceImpl.class);*/
 	@Autowired
 	private CategoriaRepository categoriaRepository; 
 	
@@ -59,8 +59,6 @@ public class CategoriaServiceImpl implements CategoriaService {
 		try {
 			categoriaRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			LOGGER.error("Saida de erro : "+e);
-			
 			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
 		}
 	
