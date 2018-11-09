@@ -48,10 +48,15 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 	@Override
 	public Categoria atualizar(Categoria categoria) {
-		buscarPorId(categoria.getId());
+		Categoria newCategoria  = buscarPorId(categoria.getId());
+		atualizarAntesDesalvar(newCategoria, categoria);
 		return categoriaRepository.save(categoria);
 	}
 
+	private void atualizarAntesDesalvar(Categoria newCategoria, Categoria categoria) {
+		newCategoria.setNome(categoria.getNome());
+		
+	}
 
 	@Override
 	public void deletar(Integer id){
@@ -64,7 +69,6 @@ public class CategoriaServiceImpl implements CategoriaService {
 	
 		
 	}
-
 
 	@Override
 	public List<Categoria> buscarTodos() {
