@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.workmade.cursomc.domain.Categoria;
 import br.com.workmade.cursomc.dto.CategoriaDTO;
@@ -35,18 +36,22 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 
 	@Override
+	@Transactional
 	public List<Categoria> salvarTodos(List<Categoria> categoria) {
 		return categoriaRepository.saveAll(categoria);
 	}
 
 
 	@Override
+	@Transactional
 	public Categoria salvarUm(Categoria categoria) {
+		categoria.setId(null);
 		return categoriaRepository.save(categoria);
 	}
 
 
 	@Override
+	@Transactional
 	public Categoria atualizar(Categoria categoria) {
 		Categoria newCategoria  = buscarPorId(categoria.getId());
 		atualizarAntesDesalvar(newCategoria, categoria);

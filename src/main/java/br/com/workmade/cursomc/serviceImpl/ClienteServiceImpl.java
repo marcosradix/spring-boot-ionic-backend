@@ -1,5 +1,6 @@
 package br.com.workmade.cursomc.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,10 +10,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.com.workmade.cursomc.domain.Cidade;
 import br.com.workmade.cursomc.domain.Cliente;
+import br.com.workmade.cursomc.domain.Endereco;
+import br.com.workmade.cursomc.domain.enums.TipoCliente;
 import br.com.workmade.cursomc.dto.ClienteDTO;
+import br.com.workmade.cursomc.dto.ClienteNovoDTO;
 import br.com.workmade.cursomc.repositories.ClienteRepository;
+import br.com.workmade.cursomc.repositories.EnderecoRepository;
 import br.com.workmade.cursomc.service.ClienteService;
 import br.com.workmade.cursomc.service.exceptions.DataIntegrityException;
 import br.com.workmade.cursomc.service.exceptions.ObjectNotFoundException;
@@ -22,9 +29,16 @@ public class ClienteServiceImpl implements ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	@Override
+	@Transactional
 	public Cliente salvarUm(Cliente cliente) {
-		return clienteRepository.save(cliente);
+		cliente.setId(null);
+		cliente = clienteRepository.save(cliente);
+		enderecoRepository.saveAll(cliente.getEnderecos());
+		return cliente;
 	}
 
 	@Override
@@ -35,11 +49,13 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
+	@Transactional
 	public List<Cliente> salvarTodos(List<Cliente> clientes) {
 		return clienteRepository.saveAll(clientes);
 	}
 
 	@Override
+	@Transactional
 	public Cliente atualizar(Cliente cliente) {
 		Cliente newCliente  = buscarPorId(cliente.getId());
 			atualizarAntesDesalvar(newCliente,cliente );
@@ -80,5 +96,19 @@ public class ClienteServiceImpl implements ClienteService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return clienteRepository.findAll(pageRequest);
 	}
+
+	@Override
+	public Cliente fromDTO(ClienteNovoDTO clienteNovoDTO) {
+		Cliente cliente = new Cliente(null, clienteNovoDTO.getNome(), clienteNovoDTO.getEmail(), clienteNovoDTO.getCpfOuCnpj(), TipoCliente.paraEnum(clienteNovoDTO.getTipo()));
+		Cidade cidade = new Cidade(clienteNovoDTO.getCidadeId(), null, null);
+		Endereco endereco = new Endereco(null, clienteNovoDTO.getLogradouro(),
+				clienteNovoDTO.getNumero(), clienteNovoDTO.getComplemento(),
+				clienteNovoDTO.getBairro(), clienteNovoDTO.getCep(), cliente, cidade);
+		cliente.getEnderecos().add(endereco);
+		cliente.getTelefones().addAll(Arrays.asList(clienteNovoDTO.getTelefone1(), clienteNovoDTO.getTelefone2(), clienteNovoDTO.getTelefone3()));
+		return cliente;
+	}
+
+
 
 }

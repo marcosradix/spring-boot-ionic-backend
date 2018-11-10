@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 
 import br.com.workmade.cursomc.domain.Cliente;
 import br.com.workmade.cursomc.dto.ClienteDTO;
+import br.com.workmade.cursomc.dto.ClienteNovoDTO;
 import br.com.workmade.cursomc.service.exceptions.ObjectNotFoundException;
 
 public interface ClienteService {
@@ -16,10 +17,12 @@ public interface ClienteService {
 	
 	public Cliente buscarPorId(Integer id) throws ObjectNotFoundException;
 
-	public Cliente atualizar(Cliente categoria);
+	public Cliente atualizar(Cliente cliente);
 
-	public Cliente fromDTO(ClienteDTO categoriaDTO);
-
+	public Cliente fromDTO(ClienteDTO clienteDTO);
+	
+	public Cliente fromDTO(ClienteNovoDTO clienteNovoDTO);
+	
 	public void deletar(Integer id);
 
 	public List<Cliente> buscarTodos();

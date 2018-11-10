@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.workmade.cursomc.domain.Cliente;
 import br.com.workmade.cursomc.dto.ClienteDTO;
+import br.com.workmade.cursomc.dto.ClienteNovoDTO;
 import br.com.workmade.cursomc.service.ClienteService;
 
 @RestController
@@ -48,12 +49,11 @@ public class ClienteResources {
 
 	
 	@RequestMapping(method=RequestMethod.POST, value="/clientes")
-	public ResponseEntity<Void> insert(@RequestBody @Valid ClienteDTO categoriaDTO) {
-		Cliente categoria = clienteService.fromDTO(categoriaDTO);
+	public ResponseEntity<Void> insert(@RequestBody @Valid ClienteNovoDTO categoriaNovoDTO) {
+		Cliente categoria = clienteService.fromDTO(categoriaNovoDTO);
 		 clienteService.salvarUm(categoria);
 		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				 .buildAndExpand(categoria.getId())
-				 .toUri();
+				 .buildAndExpand(categoria.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
