@@ -109,6 +109,11 @@ public class ClienteServiceImpl implements ClienteService {
 		return cliente;
 	}
 
+	@Override
+	public Cliente buscarPorEmail(String email) {
+		return clienteRepository.findByEmail(email);
+	}
+
 
 
 }
