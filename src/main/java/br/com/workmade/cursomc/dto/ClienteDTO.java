@@ -7,7 +7,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import br.com.workmade.cursomc.domain.Cliente;
+import br.com.workmade.cursomc.util.ClienteUpdateValidation;
 
+@ClienteUpdateValidation
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = -4857312903332572783L;

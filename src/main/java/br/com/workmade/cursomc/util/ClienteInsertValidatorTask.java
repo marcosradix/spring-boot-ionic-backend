@@ -23,14 +23,19 @@ public class ClienteInsertValidatorTask implements ConstraintValidator<ClienteIn
 	
 	@Override
 	public boolean isValid(ClienteNovoDTO clienteNovoDTO, ConstraintValidatorContext context) {
+		System.out.println("Erro "+ClienteInsertValidatorTask.class);
 		List<FieldMessage> list = new ArrayList<>();
 	
+		if(clienteNovoDTO.getTipo() != null) {
+			
 		if(clienteNovoDTO.getTipo().equals(TipoCliente.PESSOA_FISICA.getCod())  && !BR.isValidCPF(clienteNovoDTO.getCpfOuCnpj())) {
 			list.add(new FieldMessage("cpfOuCnpj", "Cpf inválido!"));
 		}
 		
 		if(clienteNovoDTO.getTipo().equals(TipoCliente.PESSOA_JURIDICA.getCod())  && !BR.isValidCNPJ(clienteNovoDTO.getCpfOuCnpj())) {
 			list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido!"));
+		}
+		
 		}
 		
 		Cliente emailExists = clienteService.buscarPorEmail(clienteNovoDTO.getEmail());

@@ -11,7 +11,12 @@ import br.com.workmade.cursomc.util.ClienteInsertValidation;
 @ClienteInsertValidation
 public class ClienteNovoDTO implements Serializable{
 	
-	private static final long serialVersionUID = -1662312442149571157L;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -415149701620229091L;
+
 	@NotEmpty(message="Campo nome é obrigatório.")
 	@Size(min=5, max=80, message="O tamanho de ser no mínimo {min} e no máximo {max}")
 	private String nome;
@@ -21,13 +26,13 @@ public class ClienteNovoDTO implements Serializable{
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
-	@NotEmpty(message="Campo {0} é obrigatório.")
+	@NotEmpty(message="Campo logradouro é obrigatório.")
 	private String logradouro;
-	@NotEmpty(message="Campo {0} é obrigatório.")
+	@NotEmpty(message="Campo número é obrigatório.")
 	private String numero;
 	private String complemento;
 	private String bairro;
-	@NotEmpty(message="Campo {0} é obrigatório.")
+	@NotEmpty(message="Campo cep é obrigatório.")
 	private String cep;
 	
 	@NotEmpty(message="Você deve informar ao menos um telefone")
