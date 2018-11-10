@@ -2,25 +2,36 @@ package br.com.workmade.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import br.com.workmade.cursomc.util.ClienteInsertValidation;
+
+@ClienteInsertValidation
 public class ClienteNovoDTO implements Serializable{
 	
 	private static final long serialVersionUID = -1662312442149571157L;
+	@NotEmpty(message="Campo nome é obrigatório.")
+	@Size(min=5, max=80, message="O tamanho de ser no mínimo {min} e no máximo {max}")
 	private String nome;
+	
+	@NotEmpty(message="Campo email é obrigatório.")
+	@Email(message="E-mail inválido.")
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
-	
+	@NotEmpty(message="Campo {0} é obrigatório.")
 	private String logradouro;
+	@NotEmpty(message="Campo {0} é obrigatório.")
 	private String numero;
 	private String complemento;
 	private String bairro;
+	@NotEmpty(message="Campo {0} é obrigatório.")
 	private String cep;
 	
 	@NotEmpty(message="Você deve informar ao menos um telefone")
-	@Size(min=8, max=11, message="O telefone deve ter entre {min} e {max} caracteres!")
+	@Size(min=8, max=11, message="O {0} deve ter entre {min} e {max} caracteres!")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
