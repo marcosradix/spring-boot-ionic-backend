@@ -23,6 +23,8 @@ public class ClienteInsertValidatorTask implements ConstraintValidator<ClienteIn
 	
 	@Override
 	public boolean isValid(ClienteNovoDTO clienteNovoDTO, ConstraintValidatorContext context) {
+		String cpfOuCnpj =  clienteNovoDTO.getCpfOuCnpj().replaceAll("\\.", "").replaceAll("-", "");
+		clienteNovoDTO.setCpfOuCnpj(cpfOuCnpj);
 		System.out.println("Erro "+ClienteInsertValidatorTask.class);
 		List<FieldMessage> list = new ArrayList<>();
 	

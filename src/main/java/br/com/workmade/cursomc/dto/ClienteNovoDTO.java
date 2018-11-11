@@ -11,10 +11,6 @@ import br.com.workmade.cursomc.util.ClienteInsertValidation;
 @ClienteInsertValidation
 public class ClienteNovoDTO implements Serializable{
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -415149701620229091L;
 
 	@NotEmpty(message="Campo nome é obrigatório.")
