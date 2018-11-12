@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import br.com.workmade.cursomc.domain.enums.TipoCliente;
 @Entity
@@ -63,7 +64,7 @@ public class Cliente implements Serializable{
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-
+	
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
@@ -104,6 +105,7 @@ public class Cliente implements Serializable{
 		return TipoCliente.paraEnum(tipo);
 	}
 
+	@JsonSetter
 	public void setTipo(TipoCliente tipo) {
 		this.tipo = tipo.getCod();
 	}

@@ -2,6 +2,8 @@ package br.com.workmade.cursomc.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -16,9 +18,9 @@ public class ItemPedido implements Serializable{
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK(); // atributo composto
 	private BigDecimal desconto;
-	private BigDecimal quantidade;
+	private Integer quantidade;
 	private BigDecimal preco;
-	public ItemPedido(Pedido pedido,Produto produto, BigDecimal desconto, BigDecimal quantidade, BigDecimal preco) {
+	public ItemPedido(Pedido pedido,Produto produto, BigDecimal desconto, Integer quantidade, BigDecimal preco) {
 		super();
 		this.id.setPedido(pedido);
 		this.id.setProduto(produto);
@@ -28,13 +30,23 @@ public class ItemPedido implements Serializable{
 	}
 	public ItemPedido() {}
 	
+	
 
 	public Produto getProduto() {
 		return id.getProduto();
 	}
+	
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
+	}
+	
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
+	}
+	
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
 	}
 	
 	public ItemPedidoPK getId() {
@@ -44,15 +56,24 @@ public class ItemPedido implements Serializable{
 		this.id = id;
 	}
 	public BigDecimal getDesconto() {
-		return desconto;
+		BigDecimal auxDesconto = new BigDecimal(0);
+		auxDesconto = desconto.multiply(preco).divide(new BigDecimal(100));
+		return auxDesconto;
 	}
+	
+	public BigDecimal getDescontoTotal() {
+		BigDecimal auxDesconto = new BigDecimal(0);
+		auxDesconto = desconto.multiply(preco).divide(new BigDecimal(100)).multiply(new BigDecimal(quantidade));
+		return auxDesconto;
+	}
+	
 	public void setDesconto(BigDecimal desconto) {
 		this.desconto = desconto;
 	}
-	public BigDecimal getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(BigDecimal quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 	public BigDecimal getPreco() {
@@ -63,8 +84,9 @@ public class ItemPedido implements Serializable{
 	}
 	
 	public BigDecimal getSubTotal() {
-		BigDecimal aux = preco.subtract(desconto);
-		return aux.multiply(quantidade);
+		BigDecimal auxPreco = preco.subtract(getDesconto());
+		BigDecimal auxQuantidade = new BigDecimal(quantidade);
+		return auxPreco.multiply(auxQuantidade);
 	}
 	
 	@Override
@@ -90,8 +112,20 @@ public class ItemPedido implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+	@Override
+	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Qte: ");
+		builder.append(getQuantidade());
+		builder.append(", Preço unitário: ");
+		builder.append(nf.format(getPreco()));
+		builder.append(", Subtotal: ");
+		builder.append(nf.format(getSubTotal()));
+		builder.append("\n");
+		return builder.toString();
+}
 	
 	
 	

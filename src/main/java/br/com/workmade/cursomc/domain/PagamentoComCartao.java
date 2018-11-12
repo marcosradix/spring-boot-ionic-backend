@@ -2,8 +2,11 @@ package br.com.workmade.cursomc.domain;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import br.com.workmade.cursomc.domain.enums.EstadoPagamento;
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
 
 	private static final long serialVersionUID = 8227980364589553016L;

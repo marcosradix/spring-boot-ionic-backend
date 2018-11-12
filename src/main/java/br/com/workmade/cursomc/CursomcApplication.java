@@ -15,19 +15,21 @@ import br.com.workmade.cursomc.domain.Cidade;
 import br.com.workmade.cursomc.domain.Cliente;
 import br.com.workmade.cursomc.domain.Endereco;
 import br.com.workmade.cursomc.domain.Estado;
+import br.com.workmade.cursomc.domain.ItemPedido;
 import br.com.workmade.cursomc.domain.Pedido;
 import br.com.workmade.cursomc.domain.Produto;
+import br.com.workmade.cursomc.domain.enums.EstadoPagamento;
 import br.com.workmade.cursomc.domain.enums.TipoCliente;
 import br.com.workmade.cursomc.service.CategoriaService;
 import br.com.workmade.cursomc.service.CidadeService;
 import br.com.workmade.cursomc.service.ClienteService;
 import br.com.workmade.cursomc.service.EnderecoService;
 import br.com.workmade.cursomc.service.EstadoService;
+import br.com.workmade.cursomc.service.ItemPedidoService;
 import br.com.workmade.cursomc.service.PedidoService;
 import br.com.workmade.cursomc.service.ProdutoService;
 
 @SpringBootApplication
-@CrossOrigin(origins = "*")
 public class CursomcApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -54,6 +56,9 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PedidoService pedidoService;
+	
+	@Autowired
+	private ItemPedidoService itemPedidoService;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -84,6 +89,8 @@ public class CursomcApplication implements CommandLineRunner {
 		 
 		  Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
 		  Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 14:32"), cli1, e1);
+		
+		  
 
 		Categoria cat1 = new Categoria(null, "Infortrônica");
 		Categoria cat2 = new Categoria(null, "Escritório");
@@ -114,6 +121,18 @@ public class CursomcApplication implements CommandLineRunner {
 		Produto p10 = new Produto(null, "Pendente", new BigDecimal(180.00));
 
 		Produto p11 = new Produto(null, "Shampoo", new BigDecimal(90.00));
+		
+		 ItemPedido itmp1 = new ItemPedido(ped1,p1, new BigDecimal(0), 5 ,p1.getPreco());
+		 ItemPedido itmp2 = new ItemPedido(ped2,p2, new BigDecimal(5), 2 ,p2.getPreco());
+		 
+		 ped2.getItens().addAll(Arrays.asList(itmp1, itmp2));
+		 ped1.getItens().addAll(Arrays.asList(itmp2, itmp1));
+		 
+		/* ped1.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
+		 ped1.getPagamento().setPedido(ped1);
+		 ped2.getPagamento().setEstadoPagamento(EstadoPagamento.QUITADO);
+		 ped2.getPagamento().setPedido(ped2);*/
+		  
 
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 
@@ -166,6 +185,8 @@ public class CursomcApplication implements CommandLineRunner {
 		produtoService.salvarProdutos(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 		
 		pedidoService.salvarTodos(Arrays.asList(ped1, ped2));
+		
+		itemPedidoService.salvarTodos(Arrays.asList(itmp1, itmp2));
 
 
 	}

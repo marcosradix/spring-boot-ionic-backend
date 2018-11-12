@@ -34,6 +34,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 	@Override
 	public Produto buscarPorId(Integer id) {
+		System.out.println("dados :"+id);
 		Optional<Produto> produto = produtoRepository.findById(id); 
 		return produto.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id : "+id+" : "+ Pedido.class.getName()));
