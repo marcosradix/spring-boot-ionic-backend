@@ -22,6 +22,7 @@ import br.com.workmade.cursomc.service.CidadeService;
 import br.com.workmade.cursomc.service.ClienteService;
 import br.com.workmade.cursomc.service.EnderecoService;
 import br.com.workmade.cursomc.service.EstadoService;
+import br.com.workmade.cursomc.service.PedidoService;
 import br.com.workmade.cursomc.service.ProdutoService;
 
 @SpringBootApplication
@@ -48,6 +49,9 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private EnderecoService enderecoService;
+	
+	@Autowired
+	private PedidoService pedidoService;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -73,12 +77,11 @@ public class CursomcApplication implements CommandLineRunner {
 
 		clienteService.salvarUm(cli1);
 		enderecoService.salvarUm(e1);
-		/*
-		 * SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy : HH:mm");
-		 * 
-		 * Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
-		 * Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 14:32"), cli1, e1);
-		 */
+	
+		  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		 
+		  Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
+		  Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 14:32"), cli1, e1);
 
 		Categoria cat1 = new Categoria(null, "Infortrônica");
 		Categoria cat2 = new Categoria(null, "Escritório");
@@ -159,6 +162,8 @@ public class CursomcApplication implements CommandLineRunner {
 		produtoService.salvarProdutos(Arrays.asList(p1, p2, p3));
 
 		produtoService.salvarProdutos(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
+		
+		pedidoService.salvarTodos(Arrays.asList(ped1, ped2));
 
 
 	}
