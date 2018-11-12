@@ -42,10 +42,10 @@ public class ProdutoResource {
 			@RequestParam(value="orderBy", defaultValue="nome") String orderBy,
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
 		String nomeDecoded = URL.decodeParam(nome);
-		List<Integer> ids = URL.transformarStringEmArrayDeInteger(categorias);
-		Page<Produto> categoriasList = produtoService.search(nomeDecoded, ids ,page, linesPerPage, orderBy, direction);
-		Page<ProdutoDTO> categoriasDTO = categoriasList.map(object -> new ProdutoDTO(object));
-		return ResponseEntity.ok().body(categoriasDTO);
+		List<Integer> categoriasIds = URL.transformarStringEmArrayDeInteger(categorias);
+		Page<Produto> produtoList = produtoService.search(nomeDecoded, categoriasIds ,page, linesPerPage, orderBy, direction);
+		Page<ProdutoDTO> produtosDTO = produtoList.map(objectProdutoDTO ->  new ProdutoDTO(objectProdutoDTO));
+		return ResponseEntity.ok().body(produtosDTO);
 	}
 }
 

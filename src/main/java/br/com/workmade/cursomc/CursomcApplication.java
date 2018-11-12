@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import br.com.workmade.cursomc.domain.Categoria;
 import br.com.workmade.cursomc.domain.Cidade;
@@ -26,6 +27,7 @@ import br.com.workmade.cursomc.service.PedidoService;
 import br.com.workmade.cursomc.service.ProdutoService;
 
 @SpringBootApplication
+@CrossOrigin(origins = "*")
 public class CursomcApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
