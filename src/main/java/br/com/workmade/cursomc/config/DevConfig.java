@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Profile;
 import br.com.workmade.cursomc.service.DBService;
 
 @Configuration
-@Profile("test")
-public class TestConfig {
+@Profile("dev")
+public class DevConfig {
 	
-	private Logger LOGGER = Logger.getLogger(TestConfig.class);
+	private Logger LOGGER = Logger.getLogger(DevConfig.class);
 
 	@Autowired
 	private DBService dBService;
@@ -25,8 +25,10 @@ public class TestConfig {
 	
 @Bean
 	public boolean instantiateDataBase() throws ParseException {
+		if(strategy.equals("create")) {
 			LOGGER.info("Modo "+strategy+" ativo");
 			dBService.instantiateDataBase();
+		}
 		
 		return false;
 	}
