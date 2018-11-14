@@ -27,7 +27,6 @@ public class TestConfig {
 	public boolean instantiateDataBase() throws ParseException {
 			LOGGER.info("Modo "+strategy+" ativo");
 			dBService.instantiateDataBase();
-		
 		return false;
 	}
 
