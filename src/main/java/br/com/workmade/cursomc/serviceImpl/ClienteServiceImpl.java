@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,9 @@ public class ClienteServiceImpl implements ClienteService {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	@Transactional
@@ -72,7 +76,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente fromDTO(ClienteDTO categoriaDTO) {
-		return new Cliente(categoriaDTO.getId(), categoriaDTO.getNome(),categoriaDTO.getEmail(), null, null);
+		return new Cliente(categoriaDTO.getId(), categoriaDTO.getNome(),categoriaDTO.getEmail(), null, null, null);
 	}
 
 	@Override
@@ -99,7 +103,8 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente fromDTO(ClienteNovoDTO clienteNovoDTO) {
-		Cliente cliente = new Cliente(null, clienteNovoDTO.getNome(), clienteNovoDTO.getEmail(), clienteNovoDTO.getCpfOuCnpj(), TipoCliente.paraEnum(clienteNovoDTO.getTipo()));
+		Cliente cliente = new Cliente(null, clienteNovoDTO.getNome(), clienteNovoDTO.getEmail(), clienteNovoDTO.getCpfOuCnpj(), TipoCliente.paraEnum(clienteNovoDTO.getTipo()),
+				bCryptPasswordEncoder.encode(clienteNovoDTO.getSenha()));
 		Cidade cidade = new Cidade(clienteNovoDTO.getCidadeId(), null, null);
 		Endereco endereco = new Endereco(null, clienteNovoDTO.getLogradouro(),
 				clienteNovoDTO.getNumero(), clienteNovoDTO.getComplemento(),

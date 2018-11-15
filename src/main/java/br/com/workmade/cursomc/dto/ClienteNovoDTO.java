@@ -30,6 +30,8 @@ public class ClienteNovoDTO implements Serializable{
 	private String bairro;
 	@NotEmpty(message="Campo cep é obrigatório.")
 	private String cep;
+	@NotEmpty(message="Campo senha é obrigatório.")
+	private String senha;
 	
 	@NotEmpty(message="Você deve informar ao menos um telefone")
 	@Size(min=8, max=11, message="O {0} deve ter entre {min} e {max} caracteres!")
@@ -144,10 +146,15 @@ public class ClienteNovoDTO implements Serializable{
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	
-	
-	
-	
-	
+
 
 }
