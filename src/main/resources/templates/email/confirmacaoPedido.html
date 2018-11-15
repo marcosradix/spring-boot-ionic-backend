@@ -32,9 +32,9 @@
 				<td th:text="${item.produto.nome}">nome</td>
 				<td th:text="${item.quantidade}">quantidade</td>
 				<td
-					th:text="${#numbers.formatDecimal(item.preco, 0, 'POINT', 2, 'COMMA')}">preco</td>
+					th:text="${#numbers.formatCurrency(item.preco)}" >preco</td>
 				<td
-					th:text="${#numbers.formatDecimal(item.subTotal, 0, 'POINT', 2, 'COMMA')}">subTotal</td>
+					th:text="${#numbers.formatCurrency(item.subTotal)}">subTotal</td>
 			</tr>
 		</table>
 		<p>
