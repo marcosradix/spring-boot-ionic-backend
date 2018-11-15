@@ -71,6 +71,7 @@ public class PedidoServiceImpl implements PedidoService {
 	@Override
 	@Transactional
 	public Pedido salvarUm(Pedido obj) {
+		LOGGER.info("Salvando...");
 		obj.setId(null);
 		obj.setInstante(new Date());
 		obj.setCliente(clienteService.buscarPorId(obj.getCliente().getId()));
@@ -91,7 +92,7 @@ public class PedidoServiceImpl implements PedidoService {
 
 		}
 		itemPedidoService.salvarTodos(obj.getItens());
-		emailService.emailDeConfirmacaoDePedido(obj);
+			emailService.emailDeConfirmacaoDePedido(obj);
 		return obj;
 	}
 

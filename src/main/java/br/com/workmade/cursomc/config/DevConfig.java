@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import br.com.workmade.cursomc.service.DBService;
+import br.com.workmade.cursomc.service.EmailService;
+import br.com.workmade.cursomc.serviceImpl.SmtpEmailServiceImpl;
 
 @Configuration
 @Profile("dev")
@@ -24,14 +26,16 @@ public class DevConfig {
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String strategy;
 	
-@Bean
+	@Bean
 	public boolean instantiateDataBase() throws ParseException {
-		if(strategy.equals("create")) {
+		if(!strategy.equals("update")) {
 			LOGGER.info("Modo "+strategy+" ativo");
 			dBService.instantiateDataBase();
 		}
-		
 		return false;
 	}
-
+	@Bean
+	public EmailService emailService() { 
+		return new SmtpEmailServiceImpl();
+	}
 }

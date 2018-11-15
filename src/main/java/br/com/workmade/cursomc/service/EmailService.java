@@ -6,7 +6,7 @@ import br.com.workmade.cursomc.domain.Pedido;
 
 public interface EmailService {
 
-	void emailDeConfirmacaoDePedido(Pedido pedido);
+	void emailDeConfirmacaoDePedido(Pedido pedido) ;
 	
 	void enviarEmail(SimpleMailMessage msg);
 }
