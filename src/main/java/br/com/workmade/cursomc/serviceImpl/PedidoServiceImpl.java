@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.workmade.cursomc.domain.Endereco;
 import br.com.workmade.cursomc.domain.ItemPedido;
 import br.com.workmade.cursomc.domain.PagamentoComBoleto;
 import br.com.workmade.cursomc.domain.Pedido;
@@ -20,6 +21,7 @@ import br.com.workmade.cursomc.repositories.PedidoRepository;
 import br.com.workmade.cursomc.service.BoletoService;
 import br.com.workmade.cursomc.service.ClienteService;
 import br.com.workmade.cursomc.service.EmailService;
+import br.com.workmade.cursomc.service.EnderecoService;
 import br.com.workmade.cursomc.service.ItemPedidoService;
 import br.com.workmade.cursomc.service.PagamentoService;
 import br.com.workmade.cursomc.service.PedidoService;
@@ -51,6 +53,9 @@ public class PedidoServiceImpl implements PedidoService {
 
 	@Autowired
 	private EmailService emailService; 
+	
+	@Autowired
+	private EnderecoService enderecoService;
 	
 	@Override
 	public Pedido buscarPorId(Integer id) throws ObjectNotFoundException {
@@ -91,8 +96,10 @@ public class PedidoServiceImpl implements PedidoService {
 			ip.setPedido(obj);
 
 		}
+		Endereco  enderecoDeEntrega = enderecoService.buscarPorId(obj.getEnderecoDeEntrega().getId());
+		obj.setEnderecoDeEntrega(enderecoDeEntrega); 
 		itemPedidoService.salvarTodos(obj.getItens());
-			emailService.emailDeConfirmacaoDePedido(obj);
+			emailService.emailDeConfirmacaoDePedidoHtml(obj);
 		return obj;
 	}
 

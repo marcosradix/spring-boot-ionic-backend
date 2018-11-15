@@ -1,6 +1,7 @@
 package br.com.workmade.cursomc.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,9 @@ public class EnderecoServiceImpl implements EnderecoService {
 	
 	@Override
 	public Endereco buscarPorId(Integer id) throws ObjectNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Endereco> endereco = enderecoRepository.findById(id); 
+		return endereco.orElseThrow(() -> new ObjectNotFoundException(
+				"Endereço não encontrado! Id : "+id+" : "+ Endereco.class.getName()));
 	}
 
 	@Override
