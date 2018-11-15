@@ -41,11 +41,58 @@
 			Valor total: <span
 				th:text="${#numbers.formatDecimal(pedido.valorTotal, 0, 'POINT', 2, 'COMMA')}"></span>
 		</p>
-		
-				<p>
-				Entrega: <span
-				th:text="${pedido.enderecoDeEntrega}"></span>
+	
+			
+			
+		<div>
+		<p>
+			<h3>Detalhes do endereço:</h3>
 		</p>
+			<table border="1" style="width: 100%">
+				<tr>
+					<th>Bairro:</th>
+					<td>
+						<span
+							th:text="${pedido.enderecoDeEntrega.bairro}">
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>Logradouro:</th>
+					<td>
+						<span
+							th:text="${pedido.enderecoDeEntrega.logradouro}">
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>Número:</th>
+					<td>
+						<span
+							th:text="${pedido.enderecoDeEntrega.numero}">
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>Complemento:</th>
+					<td>
+						<span
+							th:text="${pedido.enderecoDeEntrega.complemento}">
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>Cep:</th>
+					<td>
+						<span
+							th:text="${pedido.enderecoDeEntrega.cep}">
+						</span>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+		
 	</div>
 </body>
 </html>
