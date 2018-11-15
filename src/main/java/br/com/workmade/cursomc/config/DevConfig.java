@@ -2,7 +2,8 @@ package br.com.workmade.cursomc.config;
 
 import java.text.ParseException;
 
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,7 @@ import br.com.workmade.cursomc.service.DBService;
 @Profile("dev")
 public class DevConfig {
 	
-	private Logger LOGGER = Logger.getLogger(DevConfig.class);
+	private Logger LOGGER = LoggerFactory.getLogger(DevConfig.class);
 
 	@Autowired
 	private DBService dBService;

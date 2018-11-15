@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import br.com.workmade.cursomc.domain.enums.EstadoPagamento;
 import br.com.workmade.cursomc.repositories.PedidoRepository;
 import br.com.workmade.cursomc.service.BoletoService;
 import br.com.workmade.cursomc.service.ClienteService;
+import br.com.workmade.cursomc.service.EmailService;
 import br.com.workmade.cursomc.service.ItemPedidoService;
 import br.com.workmade.cursomc.service.PagamentoService;
 import br.com.workmade.cursomc.service.PedidoService;
@@ -27,7 +29,7 @@ import br.com.workmade.cursomc.service.exceptions.ObjectNotFoundException;
 @Service
 public class PedidoServiceImpl implements PedidoService {
 
-	private Logger LOGGER = Logger.getLogger(PedidoServiceImpl.class);
+	private Logger LOGGER = LoggerFactory.getLogger(PedidoServiceImpl.class);
 	@Autowired
 	private PedidoRepository pedidoRepository; 
 	
@@ -45,6 +47,10 @@ public class PedidoServiceImpl implements PedidoService {
 	
 	@Autowired
 	private ClienteService clienteService; 
+	
+
+	@Autowired
+	private EmailService emailService; 
 	
 	@Override
 	public Pedido buscarPorId(Integer id) throws ObjectNotFoundException {
@@ -85,7 +91,7 @@ public class PedidoServiceImpl implements PedidoService {
 
 		}
 		itemPedidoService.salvarTodos(obj.getItens());
-		LOGGER.info(obj);
+		emailService.emailDeConfirmacaoDePedido(obj);
 		return obj;
 	}
 
