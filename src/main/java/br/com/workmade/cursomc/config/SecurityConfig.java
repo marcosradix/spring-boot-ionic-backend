@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import br.com.workmade.cursomc.security.JWTAuthenticationFilter;
+import br.com.workmade.cursomc.security.JWTAuthorizationFilter;
 import br.com.workmade.cursomc.security.JWTUtil;
 
 @Configuration
@@ -47,18 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll()
 				.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_READ_ONLY).permitAll().anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-
-		/*
-		 * configuration.setAllowedOrigins(Arrays.asList("http://localhost"));
-		 * configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-		 */
-
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
 		return source;
