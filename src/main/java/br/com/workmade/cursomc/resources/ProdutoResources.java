@@ -20,7 +20,7 @@ import br.com.workmade.cursomc.util.URL;
 @RestController
 @RequestMapping(value={"/"})
 @CrossOrigin(origins = "*")
-public class ProdutoResource {
+public class ProdutoResources {
 
 
 	@Autowired

@@ -13,4 +13,5 @@ public interface IResourcesExceptionHandler {
 	ResponseEntity<StandardError> constraintViolation(DataIntegrityException e, HttpServletRequest request);
 	ResponseEntity<StandardError> argumentNotValidException(MethodArgumentNotValidException e,
 			HttpServletRequest request);
+//	ResponseEntity<StandardError> userOrEmailNotFound(UserOrEmailNotFoundException e, HttpServletRequest request);
 }

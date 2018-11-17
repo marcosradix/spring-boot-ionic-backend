@@ -22,6 +22,16 @@ public class ResourcesExceptionHandler implements IResourcesExceptionHandler{
 				HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
+	
+/*	@ExceptionHandler(UserOrEmailNotFoundException.class)
+	@Override
+	public ResponseEntity<StandardError> userOrEmailNotFound(UserOrEmailNotFoundException e, HttpServletRequest request) {
+		StandardError error = new StandardError(
+				HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}*/
+	
+	
 	@ExceptionHandler(DataIntegrityException.class)
 	@Override
 	public ResponseEntity<StandardError> constraintViolation(DataIntegrityException e,
