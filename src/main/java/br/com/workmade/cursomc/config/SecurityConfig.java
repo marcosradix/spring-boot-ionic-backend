@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	};
 	
 	private static final String[] PUBLIC_MATCHERS_READ_ONLY = {
-			"/produtos/**", "/categorias/**"
+			"/produtos/**", "/categorias/**", "/clientes/**"
 	};
 	
 	@Autowired
