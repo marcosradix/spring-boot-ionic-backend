@@ -1,6 +1,5 @@
 package br.com.workmade.cursomc.serviceImpl;
 
-import java.io.Serializable;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,7 @@ import br.com.workmade.cursomc.service.ClienteService;
 import br.com.workmade.cursomc.service.EmailService;
 
 @Service
-public class AuthServiceImpl implements AuthService, Serializable {
-
-	private static final long serialVersionUID = 5710183372809700253L;
+public class AuthServiceImpl implements AuthService {
 
 	@Autowired
 	private ClienteService clienteService;
@@ -37,6 +34,9 @@ public class AuthServiceImpl implements AuthService, Serializable {
 		clienteService.salvarComNovaSenha(cliente);
 		emailService.enviarNovaSenhaDeEmail(cliente, novaSenha);
 	}
+
+	
+	public AuthServiceImpl() {}
 
 	private String gerarNovaSenha() {
 		char[] vet = new char[10];

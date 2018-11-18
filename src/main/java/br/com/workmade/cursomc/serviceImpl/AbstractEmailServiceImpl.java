@@ -33,6 +33,12 @@ public abstract class AbstractEmailServiceImpl implements EmailService {
 		SimpleMailMessage smm = prepararSimplesMenssagemDeEmailDePedido(pedido);
 		enviarEmail(smm);
 	}
+	
+	
+
+	public AbstractEmailServiceImpl() {}
+
+
 
 	protected SimpleMailMessage prepararSimplesMenssagemDeEmailDePedido(Pedido pedido) {
 		SimpleMailMessage smm = new SimpleMailMessage();
