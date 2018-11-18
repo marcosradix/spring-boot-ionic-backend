@@ -4,15 +4,18 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.SimpleMailMessage;
 
+import br.com.workmade.cursomc.domain.Cliente;
 import br.com.workmade.cursomc.domain.Pedido;
 
 public interface EmailService {
 
-	void emailDeConfirmacaoDePedido(Pedido pedido) ;
+	public void emailDeConfirmacaoDePedido(Pedido pedido) ;
 	
-	void enviarEmail(SimpleMailMessage msg);
+	public void enviarEmail(SimpleMailMessage msg);
 	
-	void emailDeConfirmacaoDePedidoHtml(Pedido obj);
+	public void emailDeConfirmacaoDePedidoHtml(Pedido obj);
 	
-	void enviarEmailHtml(MimeMessage msg);
+	public void enviarEmailHtml(MimeMessage msg);
+	
+	public void enviarNovaSenhaDeEmail(Cliente cliente, String novaSenha);
 }

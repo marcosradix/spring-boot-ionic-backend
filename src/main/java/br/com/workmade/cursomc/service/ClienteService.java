@@ -13,6 +13,8 @@ public interface ClienteService {
 
 	public Cliente salvarUm(Cliente cliente);
 	
+	public Cliente salvarComNovaSenha(Cliente cliente);
+	
 	public Cliente buscarPorEmail(String email);
 	
 	public List<Cliente> salvarTodos(List<Cliente> clientes);

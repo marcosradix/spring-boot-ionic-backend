@@ -48,6 +48,12 @@ public class ClienteServiceImpl implements ClienteService {
 		enderecoRepository.saveAll(cliente.getEnderecos());
 		return cliente;
 	}
+	
+	public Cliente salvarComNovaSenha(Cliente cliente) {
+		cliente = clienteRepository.save(cliente);
+		enderecoRepository.saveAll(cliente.getEnderecos());
+		return cliente;
+	}
 
 	@Override
 	public Cliente buscarPorId(Integer id) throws ObjectNotFoundException {
@@ -125,9 +131,10 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente buscarPorEmail(String email) {
-		return clienteRepository.findByEmail(email);
+		Optional<Cliente> cliente = clienteRepository.findByEmail(email); 
+		return cliente.orElseThrow(() -> new ObjectNotFoundException(
+				"O email não foi encontrado, email : "+email));
 	}
-
 
 
 }

@@ -11,6 +11,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 public class SmtpEmailServiceImpl extends AbstractEmailServiceImpl {
 
+	private static final long serialVersionUID = 289833830063919599L;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(SmtpEmailServiceImpl.class);
 	
 	@Autowired
