@@ -84,7 +84,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 	@Override
 	public Page<Categoria> buscarPorPagina(Integer page, Integer linesPerPage, String orderBy, String direction) {
-		Pageable pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return categoriaRepository.findAll(pageRequest);
 	}
 

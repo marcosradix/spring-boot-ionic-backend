@@ -8,9 +8,13 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.workmade.cursomc.domain.Cliente;
 import br.com.workmade.cursomc.domain.Endereco;
 import br.com.workmade.cursomc.domain.ItemPedido;
 import br.com.workmade.cursomc.domain.PagamentoComBoleto;
@@ -18,6 +22,7 @@ import br.com.workmade.cursomc.domain.Pedido;
 import br.com.workmade.cursomc.domain.Produto;
 import br.com.workmade.cursomc.domain.enums.EstadoPagamento;
 import br.com.workmade.cursomc.repositories.PedidoRepository;
+import br.com.workmade.cursomc.security.UserSS;
 import br.com.workmade.cursomc.service.BoletoService;
 import br.com.workmade.cursomc.service.ClienteService;
 import br.com.workmade.cursomc.service.EmailService;
@@ -26,6 +31,8 @@ import br.com.workmade.cursomc.service.ItemPedidoService;
 import br.com.workmade.cursomc.service.PagamentoService;
 import br.com.workmade.cursomc.service.PedidoService;
 import br.com.workmade.cursomc.service.ProdutoService;
+import br.com.workmade.cursomc.service.UserService;
+import br.com.workmade.cursomc.service.exceptions.AuthorizationException;
 import br.com.workmade.cursomc.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -102,6 +109,19 @@ public class PedidoServiceImpl implements PedidoService {
 			emailService.emailDeConfirmacaoDePedidoHtml(obj);
 		return obj;
 	}
+
+
+	@Override
+	public Page<Pedido> buscarPorPagina(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		UserSS user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado!");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Cliente cliente = clienteService.buscarPorId(user.getId());
+		return pedidoRepository.findByCliente(cliente, pageRequest);
+		
+	}	
 
 
 
