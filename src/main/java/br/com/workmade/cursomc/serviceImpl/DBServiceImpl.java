@@ -1,6 +1,5 @@
 package br.com.workmade.cursomc.serviceImpl;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,10 +33,10 @@ import br.com.workmade.cursomc.repositories.PagamentoRepository;
 import br.com.workmade.cursomc.repositories.PedidoRepository;
 import br.com.workmade.cursomc.repositories.ProdutoRepository;
 import br.com.workmade.cursomc.service.DBService;
-@Service
-public class DBServiceImpl implements DBService, Serializable {
 
-	private static final long serialVersionUID = -8914813014781603818L;
+@Service
+public class DBServiceImpl implements DBService {
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	@Autowired

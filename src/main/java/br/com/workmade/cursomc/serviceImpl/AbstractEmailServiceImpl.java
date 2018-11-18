@@ -1,6 +1,5 @@
 package br.com.workmade.cursomc.serviceImpl;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.mail.MessagingException;
@@ -18,9 +17,7 @@ import br.com.workmade.cursomc.domain.Cliente;
 import br.com.workmade.cursomc.domain.Pedido;
 import br.com.workmade.cursomc.service.EmailService;
 
-public abstract class AbstractEmailServiceImpl implements EmailService, Serializable {
-
-	private static final long serialVersionUID = 1174004047406824659L;
+public abstract class AbstractEmailServiceImpl implements EmailService {
 
 	@Value("${default.email.de}")
 	private String emailFrom;
