@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +36,7 @@ public class CategoriaResources {
 		Categoria categoria = categoriaService.buscarPorId(id);
 		return ResponseEntity.ok().body(categoria);
 	}
-	
+	@PreAuthorize("hasAnyRole('ADMIN')") 
 	@RequestMapping(method=RequestMethod.PUT, value="/categorias/{id}")
 	public ResponseEntity<Void> update(@RequestBody @Valid CategoriaDTO categoriaDTO, @PathVariable Integer id) {
 		Categoria categoria = categoriaService.fromDTO(categoriaDTO);
@@ -44,7 +45,7 @@ public class CategoriaResources {
 		return ResponseEntity.noContent().build();
 	}
 
-	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST, value="/categorias")
 	public ResponseEntity<Void> insert(@RequestBody @Valid CategoriaDTO categoriaDTO) {
 		Categoria categoria = categoriaService.fromDTO(categoriaDTO);
@@ -54,7 +55,7 @@ public class CategoriaResources {
 				 .toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+	@PreAuthorize("hasAnyRole('ADMIN')") 
 	@RequestMapping(method=RequestMethod.DELETE, value="/categorias/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		categoriaService.deletar(id);
