@@ -16,12 +16,16 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.workmade.cursomc.domain.Cidade;
 import br.com.workmade.cursomc.domain.Cliente;
 import br.com.workmade.cursomc.domain.Endereco;
+import br.com.workmade.cursomc.domain.enums.Perfil;
 import br.com.workmade.cursomc.domain.enums.TipoCliente;
 import br.com.workmade.cursomc.dto.ClienteDTO;
 import br.com.workmade.cursomc.dto.ClienteNovoDTO;
 import br.com.workmade.cursomc.repositories.ClienteRepository;
 import br.com.workmade.cursomc.repositories.EnderecoRepository;
+import br.com.workmade.cursomc.security.UserSS;
 import br.com.workmade.cursomc.service.ClienteService;
+import br.com.workmade.cursomc.service.UserService;
+import br.com.workmade.cursomc.service.exceptions.AuthorizationException;
 import br.com.workmade.cursomc.service.exceptions.DataIntegrityException;
 import br.com.workmade.cursomc.service.exceptions.ObjectNotFoundException;
 @Service
@@ -47,6 +51,11 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente buscarPorId(Integer id) throws ObjectNotFoundException {
+		UserSS user = UserService.authenticated();
+		if(  (user == null || !user.hasRole(Perfil.ADMIN)) && !id.equals(user.getId())  ) {
+			throw new AuthorizationException("Acesso negado.");
+		}
+		
 		Optional<Cliente> cliente = clienteRepository.findById(id); 
 		return cliente.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id : "+id+" : "+ Cliente.class.getName()));
