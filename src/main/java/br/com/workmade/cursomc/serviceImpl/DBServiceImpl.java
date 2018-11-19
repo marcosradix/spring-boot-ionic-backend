@@ -23,38 +23,38 @@ import br.com.workmade.cursomc.domain.Produto;
 import br.com.workmade.cursomc.domain.enums.EstadoPagamento;
 import br.com.workmade.cursomc.domain.enums.Perfil;
 import br.com.workmade.cursomc.domain.enums.TipoCliente;
-import br.com.workmade.cursomc.repositories.CategoriaRepository;
-import br.com.workmade.cursomc.repositories.CidadeRepository;
-import br.com.workmade.cursomc.repositories.ClienteRepository;
-import br.com.workmade.cursomc.repositories.EnderecoRepository;
-import br.com.workmade.cursomc.repositories.EstadoRepository;
-import br.com.workmade.cursomc.repositories.ItemPedidoRepository;
-import br.com.workmade.cursomc.repositories.PagamentoRepository;
-import br.com.workmade.cursomc.repositories.PedidoRepository;
-import br.com.workmade.cursomc.repositories.ProdutoRepository;
+import br.com.workmade.cursomc.service.CategoriaService;
+import br.com.workmade.cursomc.service.CidadeService;
+import br.com.workmade.cursomc.service.ClienteService;
 import br.com.workmade.cursomc.service.DBService;
+import br.com.workmade.cursomc.service.EnderecoService;
+import br.com.workmade.cursomc.service.EstadoService;
+import br.com.workmade.cursomc.service.ItemPedidoService;
+import br.com.workmade.cursomc.service.PagamentoService;
+import br.com.workmade.cursomc.service.PedidoService;
+import br.com.workmade.cursomc.service.ProdutoService;
 
 @Service
 public class DBServiceImpl implements DBService {
 
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private CategoriaService categoriaService;
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private ProdutoService produtoService;
 	@Autowired
-	private EstadoRepository estadoRepository;
+	private EstadoService estadoService;
 	@Autowired
-	private CidadeRepository cidadeRepository;
+	private CidadeService cidadeService;
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteService clienteService;
 	@Autowired
-	private EnderecoRepository enderecoRepository;
+	private EnderecoService enderecoService;
 	@Autowired
-	private PedidoRepository pedidoRepository;
+	private PedidoService pedidoService;
 	@Autowired
-	private PagamentoRepository pagamentoRepository;
+	private PagamentoService pagamentoService;
 	@Autowired
-	private ItemPedidoRepository itemPedidoRepository;
+	private ItemPedidoService itemPedidoService;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -106,8 +106,8 @@ public class DBServiceImpl implements DBService {
 		p10.getCategorias().addAll(Arrays.asList(cat6));
 		p11.getCategorias().addAll(Arrays.asList(cat7));		
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
+		categoriaService.salvarTodos(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
+		produtoService.salvarProdutos(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
 		Estado est3 = new Estado(null, "Ceará");
@@ -121,8 +121,8 @@ public class DBServiceImpl implements DBService {
 		est2.getCidades().addAll(Arrays.asList(c2, c3));
 		est3.getCidades().addAll(Arrays.asList(c4));
 		
-		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
-		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
+		estadoService.salvarTodos(Arrays.asList(est1, est2, est3));
+		cidadeService.salvarTodos(Arrays.asList(c1, c2, c3, c4));
 		
 		Cliente cli1 = new Cliente(null, "Marcos Silva", "marcosradix@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, bCryptPasswordEncoder.encode("1234567890"));
 		Cliente cli2 = new Cliente(null, "Marcos Ferreira", "marcosradix@outlook.com", "04127612380", TipoCliente.PESSOA_FISICA, bCryptPasswordEncoder.encode("1234567890"));
@@ -138,8 +138,8 @@ public class DBServiceImpl implements DBService {
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		cli2.getEnderecos().add(e3);
 		
-		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
+		clienteService.salvarTodos(Arrays.asList(cli1, cli2));
+		enderecoService.salvarTodos(Arrays.asList(e1, e2, e3));
 	
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
@@ -154,8 +154,8 @@ public class DBServiceImpl implements DBService {
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 				
-		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
-		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		pedidoService.salvarTodos(Arrays.asList(ped1, ped2));
+		pagamentoService.salvarTodos(Arrays.asList(pagto1, pagto2));
 		
 		ItemPedido ip1 = new ItemPedido(ped1, p1, new BigDecimal(0.00), 1, p1.getPreco());
 		ItemPedido ip2 = new ItemPedido(ped1, p3, new BigDecimal(0.00), 2, p3.getPreco());
@@ -168,7 +168,7 @@ public class DBServiceImpl implements DBService {
 		p2.getItens().addAll(Arrays.asList(ip3));
 		p3.getItens().addAll(Arrays.asList(ip2));
 		
-		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));	
+		itemPedidoService.salvarTodos(Arrays.asList(ip1, ip2, ip3));	
 		
 		
 
