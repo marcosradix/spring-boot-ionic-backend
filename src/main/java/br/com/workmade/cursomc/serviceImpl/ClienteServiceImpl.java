@@ -45,7 +45,7 @@ public class ClienteServiceImpl implements ClienteService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
-	private S3Service S3Service;
+	private S3Service s3Service;
 	
 	@Override
 	@Transactional
@@ -145,8 +145,17 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public URI enviarFotoParaPerfil(MultipartFile multi) {
-		return S3Service.uploadFile(multi);
+		UserSS user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado.");
+		}
+		
+		URI uri = s3Service.uploadFile(multi);
+		Optional<Cliente> cliente = clienteRepository.findById(user.getId());
+		cliente.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado"));
+		cliente.get().setImageURL(uri.toString());
+		return uri;
 	}
 
-
+	
 }
