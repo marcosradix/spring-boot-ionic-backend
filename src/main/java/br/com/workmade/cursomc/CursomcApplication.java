@@ -1,8 +1,11 @@
 package br.com.workmade.cursomc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import br.com.workmade.cursomc.service.S3Service;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner {
@@ -11,10 +14,12 @@ public class CursomcApplication implements CommandLineRunner {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
 
-
+	@Autowired
+	private S3Service s3Service;
+	
 	@Override
 	public void run(String... args) throws Exception {
-
+		s3Service.uploadFile("D:\\Dev\\Koala.jpg");
 
 	}
 
