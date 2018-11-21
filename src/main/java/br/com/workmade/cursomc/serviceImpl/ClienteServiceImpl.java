@@ -56,6 +56,9 @@ public class ClienteServiceImpl implements ClienteService {
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
 	
+	@Value("${img.profile.size}")
+	private Integer sizeImg;
+	
 	@Override
 	@Transactional
 	public Cliente salvarUm(Cliente cliente) {
@@ -159,6 +162,10 @@ public class ClienteServiceImpl implements ClienteService {
 			throw new AuthorizationException("Acesso negado.");
 		}
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multi);
+		jpgImage = imageService.cropSquare(jpgImage);
+		jpgImage= imageService.resize(jpgImage, sizeImg);
+		
+		
 		String fileName = prefix + user.getId() + ".jpg";
 		return  s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 
