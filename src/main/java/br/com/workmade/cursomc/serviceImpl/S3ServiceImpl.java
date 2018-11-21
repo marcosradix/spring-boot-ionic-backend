@@ -16,6 +16,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
 import br.com.workmade.cursomc.service.S3Service;
+import br.com.workmade.cursomc.service.exceptions.FileException;
 
 @Service
 public class S3ServiceImpl implements S3Service {
@@ -38,7 +39,7 @@ public class S3ServiceImpl implements S3Service {
 			return uploadFile(inputStream, fileName, contentType);
 		} catch (IOException e) {
 			LOG.info(e.getMessage());
-			throw new RuntimeException("Erro O/I");
+			throw new FileException("Erro O/I " +e.getMessage() );
 		}
 
 	}
@@ -53,7 +54,7 @@ public class S3ServiceImpl implements S3Service {
 			LOG.info("envio terminado");
 			return s3Client.getUrl(bucketName, fileName).toURI();
 		} catch (URISyntaxException e) {
-			throw new RuntimeException("Erro ao converter URL para URI");
+			throw new FileException("Erro ao converter URL para URI");
 		}
 	}
 
