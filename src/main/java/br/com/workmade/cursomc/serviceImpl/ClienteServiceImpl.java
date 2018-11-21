@@ -1,5 +1,6 @@
 package br.com.workmade.cursomc.serviceImpl;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.workmade.cursomc.domain.Cidade;
 import br.com.workmade.cursomc.domain.Cliente;
@@ -28,6 +30,8 @@ import br.com.workmade.cursomc.service.UserService;
 import br.com.workmade.cursomc.service.exceptions.AuthorizationException;
 import br.com.workmade.cursomc.service.exceptions.DataIntegrityException;
 import br.com.workmade.cursomc.service.exceptions.ObjectNotFoundException;
+import br.com.workmade.cursomc.service.S3Service;
+
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
@@ -39,6 +43,9 @@ public class ClienteServiceImpl implements ClienteService {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private S3Service S3Service;
 	
 	@Override
 	@Transactional
@@ -134,6 +141,11 @@ public class ClienteServiceImpl implements ClienteService {
 		Optional<Cliente> cliente = clienteRepository.findByEmail(email); 
 		return cliente.orElseThrow(() -> new ObjectNotFoundException(
 				"O email não foi encontrado, email : "+email));
+	}
+
+	@Override
+	public URI enviarFotoParaPerfil(MultipartFile multi) {
+		return S3Service.uploadFile(multi);
 	}
 
 

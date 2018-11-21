@@ -1,8 +1,10 @@
 package br.com.workmade.cursomc.service;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.workmade.cursomc.domain.Cliente;
 import br.com.workmade.cursomc.dto.ClienteDTO;
@@ -32,4 +34,7 @@ public interface ClienteService {
 	public List<Cliente> buscarTodos();
 
 	public Page<Cliente> buscarPorPagina(Integer page, Integer linesPerPage, String orderBy, String direction);
+	
+	public URI enviarFotoParaPerfil(MultipartFile multi);
+	
 }
