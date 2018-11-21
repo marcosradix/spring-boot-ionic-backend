@@ -24,7 +24,8 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public BufferedImage getJpgImageFromFile(MultipartFile multipartFile) {
 		String ext = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-		if( !"png".equals(ext) && !"jpg".equals(ext) ) {
+		System.out.println("extensão "+ext);
+		if( !"png".equalsIgnoreCase(ext) && !"jpg".equalsIgnoreCase(ext) ) {
 			throw new FileException("Somente imagens PNG e JPG são permitidas!");
 		}
 		
