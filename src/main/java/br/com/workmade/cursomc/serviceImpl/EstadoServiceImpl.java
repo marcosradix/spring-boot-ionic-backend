@@ -25,4 +25,9 @@ public class EstadoServiceImpl implements EstadoService {
 		return estadoRepository.saveAll(estados);
 	}
 
+	@Override
+	public List<Estado> buscarEstados() {
+		return estadoRepository.findAllByOrderByNome();
+	}
+
 }

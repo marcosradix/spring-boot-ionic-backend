@@ -17,7 +17,7 @@ import br.com.workmade.cursomc.service.AuthService;
 import br.com.workmade.cursomc.service.UserService;
 @RestController
 @RequestMapping(value={"/auth"})
-public class AuthResource {
+public class AuthResources {
 
 	@Autowired
 	private JWTUtil jwtUtil;

@@ -9,4 +9,6 @@ public interface EstadoService {
 	public Estado salvar(Estado estado);
 	
 	public List<Estado> salvarTodos(List<Estado> estados);
+	
+	public List<Estado> buscarEstados();
 }

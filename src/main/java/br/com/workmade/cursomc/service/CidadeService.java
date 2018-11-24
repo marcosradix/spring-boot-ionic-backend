@@ -8,5 +8,7 @@ public interface CidadeService {
 	public Cidade salvar(Cidade cidade);
 	
 	public List<Cidade> salvarTodos(List<Cidade> cidades);
+
+	public List<Cidade> listarCidadesPorIdEstado(Integer estadoId);
 	
 }

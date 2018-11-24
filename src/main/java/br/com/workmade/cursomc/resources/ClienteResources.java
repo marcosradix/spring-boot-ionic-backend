@@ -39,7 +39,7 @@ public class ClienteResources {
 		Cliente cliente = clienteService.buscarPorId(id);
 		return ResponseEntity.ok().body(cliente);
 	}
-	
+	@PreAuthorize("hasAnyRole('ADMIN')") 
 	@RequestMapping(method=RequestMethod.GET, value="/clientes/email")
 	public ResponseEntity<Cliente> findByEmailLogedUser(@RequestParam(value="email") String email){
 		Cliente cliente = clienteService.buscarPorEmailUsuarioLogado(email);
