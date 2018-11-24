@@ -36,5 +36,7 @@ public interface ClienteService {
 	public Page<Cliente> buscarPorPagina(Integer page, Integer linesPerPage, String orderBy, String direction);
 	
 	public URI enviarFotoParaPerfil(MultipartFile multi);
+
+	Cliente buscarPorEmailUsuarioLogado(String email);
 	
 }

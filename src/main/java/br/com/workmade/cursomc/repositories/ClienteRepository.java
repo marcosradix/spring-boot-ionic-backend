@@ -14,4 +14,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	@Transactional(readOnly=true)
 	public Optional<Cliente> findByEmail(String email);
 
+	/*@Query(name="select * from CLIENTE where email=:email",nativeQuery=true)
+	public Cliente buscarClientePorUsuarioLogado(@Param("email") String email);*/
+
 }

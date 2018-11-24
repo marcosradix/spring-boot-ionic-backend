@@ -154,6 +154,17 @@ public class ClienteServiceImpl implements ClienteService {
 		return cliente.orElseThrow(() -> new ObjectNotFoundException(
 				"O email não foi encontrado, email : "+email));
 	}
+	
+	@Override
+	public Cliente buscarPorEmailUsuarioLogado(String email) {
+		UserSS user = UserService.authenticated();	
+		if(user == null || (!email.equals( user.getUsername() ) || !user.hasRole(Perfil.ADMIN)) ){
+			throw new AuthorizationException("Acesso negado.");
+		}
+			Optional<Cliente> cliente = clienteRepository.findByEmail(email); 
+			return cliente.orElseThrow(() -> new ObjectNotFoundException(
+					"O email não foi encontrado, email : "+email));
+	}
 
 	@Override
 	public URI enviarFotoParaPerfil(MultipartFile multi) {

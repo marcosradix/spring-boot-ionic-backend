@@ -40,6 +40,12 @@ public class ClienteResources {
 		return ResponseEntity.ok().body(cliente);
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/clientes/email")
+	public ResponseEntity<Cliente> findByEmailLogedUser(@RequestParam(value="email") String email){
+		Cliente cliente = clienteService.buscarPorEmailUsuarioLogado(email);
+		return ResponseEntity.ok().body(cliente);
+	}
+	
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/clientes/{id}")
 	public ResponseEntity<Void> update(@RequestBody @Valid ClienteDTO categoriaDTO, @PathVariable Integer id) {
