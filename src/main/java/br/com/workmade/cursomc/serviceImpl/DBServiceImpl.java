@@ -170,6 +170,93 @@ public class DBServiceImpl implements DBService {
 		
 		itemPedidoService.salvarTodos(Arrays.asList(ip1, ip2, ip3));	
 		
+		Produto p12 = new Produto(null, "Produto 12", new BigDecimal(10.00));
+		Produto p13 = new Produto(null, "Produto 13", new BigDecimal(10.00));
+		Produto p14 = new Produto(null, "Produto 14", new BigDecimal(10.00));
+		Produto p15 = new Produto(null, "Produto 15", new BigDecimal(10.00));
+		Produto p16 = new Produto(null, "Produto 16", new BigDecimal(10.00));
+		Produto p17 = new Produto(null, "Produto 17", new BigDecimal(10.00));
+		Produto p18 = new Produto(null, "Produto 18", new BigDecimal(10.00));
+		Produto p19 = new Produto(null, "Produto 19", new BigDecimal(10.00));
+		Produto p20 = new Produto(null, "Produto 20", new BigDecimal(10.00));
+		Produto p21 = new Produto(null, "Produto 21", new BigDecimal(10.00));
+		Produto p22 = new Produto(null, "Produto 22", new BigDecimal(10.00));
+		Produto p23 = new Produto(null, "Produto 23", new BigDecimal(10.00));
+		Produto p24 = new Produto(null, "Produto 24", new BigDecimal(10.00));
+		Produto p25 = new Produto(null, "Produto 25", new BigDecimal(10.00));
+		Produto p26 = new Produto(null, "Produto 26", new BigDecimal(10.00));
+		Produto p27 = new Produto(null, "Produto 27", new BigDecimal(10.00));
+		Produto p28 = new Produto(null, "Produto 28", new BigDecimal(10.00));
+		Produto p29 = new Produto(null, "Produto 29", new BigDecimal(10.00));
+		Produto p30 = new Produto(null, "Produto 30", new BigDecimal(10.00));
+		Produto p31 = new Produto(null, "Produto 31", new BigDecimal(10.00));
+		Produto p32 = new Produto(null, "Produto 32", new BigDecimal(10.00));
+		Produto p33 = new Produto(null, "Produto 33", new BigDecimal(10.00));
+		Produto p34 = new Produto(null, "Produto 34", new BigDecimal(10.00));
+		Produto p35 = new Produto(null, "Produto 35", new BigDecimal(10.00));
+		Produto p36 = new Produto(null, "Produto 36", new BigDecimal(10.00));
+		Produto p37 = new Produto(null, "Produto 37", new BigDecimal(10.00));
+		Produto p38 = new Produto(null, "Produto 38", new BigDecimal(10.00));
+		Produto p39 = new Produto(null, "Produto 39", new BigDecimal(10.00));
+		Produto p40 = new Produto(null, "Produto 40", new BigDecimal(10.00));
+		Produto p41 = new Produto(null, "Produto 41", new BigDecimal(10.00));
+		Produto p42 = new Produto(null, "Produto 42", new BigDecimal(10.00));
+		Produto p43 = new Produto(null, "Produto 43", new BigDecimal(10.00));
+		Produto p44 = new Produto(null, "Produto 44", new BigDecimal(10.00));
+		Produto p45 = new Produto(null, "Produto 45", new BigDecimal(10.00));
+		Produto p46 = new Produto(null, "Produto 46", new BigDecimal(10.00));
+		Produto p47 = new Produto(null, "Produto 47", new BigDecimal(10.00));
+		Produto p48 = new Produto(null, "Produto 48", new BigDecimal(10.00));
+		Produto p49 = new Produto(null, "Produto 49", new BigDecimal(10.00));
+		Produto p50 = new Produto(null, "Produto 50", new BigDecimal(10.00));
+		
+		cat1.getProdutos()
+				.addAll(Arrays.asList(p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27,
+						p28, p29, p30, p31, p32, p34, p35, p36, p37, p38, p39, p40, p41, p42, p43, p44, p45, p46, p47,
+						p48, p49, p50));
+
+		p12.getCategorias().add(cat1);
+		p13.getCategorias().add(cat1);
+		p14.getCategorias().add(cat1);
+		p15.getCategorias().add(cat1);
+		p16.getCategorias().add(cat1);
+		p17.getCategorias().add(cat1);
+		p18.getCategorias().add(cat1);
+		p19.getCategorias().add(cat1);
+		p20.getCategorias().add(cat1);
+		p21.getCategorias().add(cat1);
+		p22.getCategorias().add(cat1);
+		p23.getCategorias().add(cat1);
+		p24.getCategorias().add(cat1);
+		p25.getCategorias().add(cat1);
+		p26.getCategorias().add(cat1);
+		p27.getCategorias().add(cat1);
+		p28.getCategorias().add(cat1);
+		p29.getCategorias().add(cat1);
+		p30.getCategorias().add(cat1);
+		p31.getCategorias().add(cat1);
+		p32.getCategorias().add(cat1);
+		p33.getCategorias().add(cat1);
+		p34.getCategorias().add(cat1);
+		p35.getCategorias().add(cat1);
+		p36.getCategorias().add(cat1);
+		p37.getCategorias().add(cat1);
+		p38.getCategorias().add(cat1);
+		p39.getCategorias().add(cat1);
+		p40.getCategorias().add(cat1);
+		p41.getCategorias().add(cat1);
+		p42.getCategorias().add(cat1);
+		p43.getCategorias().add(cat1);
+		p44.getCategorias().add(cat1);
+		p45.getCategorias().add(cat1);
+		p46.getCategorias().add(cat1);
+		p47.getCategorias().add(cat1);
+		p48.getCategorias().add(cat1);
+		p49.getCategorias().add(cat1);
+		p50.getCategorias().add(cat1);
+		produtoService.salvarProdutos(Arrays.asList(p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26,
+				p27, p28, p29, p30, p31, p32, p34, p35, p36, p37, p38, p39, p40, p41, p42, p43, p44, p45, p46, p47, p48,
+				p49, p50));
 		
 
 
