@@ -158,7 +158,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Cliente buscarPorEmailUsuarioLogado(String email) {
 		UserSS user = UserService.authenticated();	
-		if(user == null || (!email.equals( user.getUsername() ) || !user.hasRole(Perfil.ADMIN)) ){
+		if(user == null || (!email.equals( user.getUsername() )) ){
 			throw new AuthorizationException("Acesso negado.");
 		}
 			Optional<Cliente> cliente = clienteRepository.findByEmail(email); 
