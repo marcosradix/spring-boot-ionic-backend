@@ -57,11 +57,12 @@ public class ClienteResources {
 
 	
 	@RequestMapping(method=RequestMethod.POST, value="/clientes")
-	public ResponseEntity<Void> insert(@RequestBody @Valid ClienteNovoDTO categoriaNovoDTO) {
-		Cliente categoria = clienteService.fromDTO(categoriaNovoDTO);
-		 clienteService.salvarUm(categoria);
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNovoDTO categoriaNovoDTO) {
+		Cliente clienteDTO = clienteService.fromDTO(categoriaNovoDTO);
+		 clienteService.salvarUm(clienteDTO);
+		 
 		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				 .buildAndExpand(categoria.getId()).toUri();
+				 .buildAndExpand(clienteDTO.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	@PreAuthorize("hasAnyRole('ADMIN')") 

@@ -156,6 +156,12 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 	
 	@Override
+	public Cliente buscarPorEmailValidator(String email) {
+		Optional<Cliente> cliente = clienteRepository.findByEmail(email); 
+		return cliente.orElse(null);
+	}
+	
+	@Override
 	public Cliente buscarPorEmailUsuarioLogado(String email) {
 		UserSS user = UserService.authenticated();	
 		if(user == null || (!email.equals( user.getUsername() )) ){

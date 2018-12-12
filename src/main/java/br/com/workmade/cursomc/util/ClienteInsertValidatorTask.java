@@ -40,7 +40,7 @@ public class ClienteInsertValidatorTask implements ConstraintValidator<ClienteIn
 		
 		}
 		
-		Cliente emailExists = clienteService.buscarPorEmail(clienteNovoDTO.getEmail());
+		Cliente emailExists = clienteService.buscarPorEmailValidator(clienteNovoDTO.getEmail());
 			if(emailExists != null) {
 				list.add(new FieldMessage("email", "E-mail já cadastrado."));
 			}

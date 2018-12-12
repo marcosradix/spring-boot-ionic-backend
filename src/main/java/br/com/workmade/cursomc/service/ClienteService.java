@@ -38,5 +38,7 @@ public interface ClienteService {
 	public URI enviarFotoParaPerfil(MultipartFile multi);
 
 	Cliente buscarPorEmailUsuarioLogado(String email);
+
+	Cliente buscarPorEmailValidator(String email);
 	
 }

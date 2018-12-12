@@ -35,7 +35,7 @@ public class ClienteUpdateValidatorTask implements ConstraintValidator<ClienteUp
 		Integer idRequest = Integer.parseInt(map.get("id"));
 		List<FieldMessage> list = new ArrayList<>();
 	
-		Cliente clienteBanco = clienteService.buscarPorEmail(clienteDTO.getEmail());
+		Cliente clienteBanco = clienteService.buscarPorEmailValidator(clienteDTO.getEmail());
 			if(clienteBanco != null && !clienteBanco.getId().equals(idRequest)) {
 				list.add(new FieldMessage("email", "E-mail já existente."));
 			}
