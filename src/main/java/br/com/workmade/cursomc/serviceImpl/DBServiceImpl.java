@@ -69,17 +69,17 @@ public class DBServiceImpl implements DBService {
 		Categoria cat6 = new Categoria(null, "Decoração");
 		Categoria cat7 = new Categoria(null, "Perfumaria");
 		
-		Produto p1 = new Produto(null, "Computador", new BigDecimal(2000.00));
-		Produto p2 = new Produto(null, "Impressora", new BigDecimal(800.00));
-		Produto p3 = new Produto(null, "Mouse", new BigDecimal(80.00));
-		Produto p4 = new Produto(null, "Mesa de escritório",new BigDecimal(300.00));
-		Produto p5 = new Produto(null, "Toalha", new BigDecimal(50.00));
-		Produto p6 = new Produto(null, "Colcha", new BigDecimal(200.00));
-		Produto p7 = new Produto(null, "TV true color", new BigDecimal(1200.00));
-		Produto p8 = new Produto(null, "Roçadeira", new BigDecimal(800.00));
-		Produto p9 = new Produto(null, "Abajour", new BigDecimal(100.00));
-		Produto p10 = new Produto(null, "Pendente", new BigDecimal(180.00));
-		Produto p11 = new Produto(null, "Shampoo", new BigDecimal(90.00));
+		Produto p1 = new Produto(null, "Computador", new BigDecimal(2000.00), new StringBuilder("Computador Lenovo Thinkped 3535A"));
+		Produto p2 = new Produto(null, "Impressora", new BigDecimal(800.00), new StringBuilder("Lexmark Multifuncional jato de tinta"));
+		Produto p3 = new Produto(null, "Mouse", new BigDecimal(80.00) , new StringBuilder("Mouse Lenovo 300 dpi"));
+		Produto p4 = new Produto(null, "Mesa de escritório",new BigDecimal(300.00), new StringBuilder("Mesa para escritório branca com gaveta"));
+		Produto p5 = new Produto(null, "Toalha", new BigDecimal(50.00) , new StringBuilder("Toalha de banho macia"));
+		Produto p6 = new Produto(null, "Cocha", new BigDecimal(200.00) , new StringBuilder("Cocha de cama de casal"));
+		Produto p7 = new Produto(null, "TV true color", new BigDecimal(1200.00) , new StringBuilder("Tv 40 polegadas Samsung full HD"));
+		Produto p8 = new Produto(null, "Roçadeira", new BigDecimal(800.00) , new StringBuilder("Roçadeira  elétrica até 5 horas de altonomia "));
+		Produto p9 = new Produto(null, "Abajour", new BigDecimal(100.00) , new StringBuilder("Abajour de quarto durma bem"));
+		Produto p10 = new Produto(null, "Pendente", new BigDecimal(180.00) , new StringBuilder("Não há informações"));
+		Produto p11 = new Produto(null, "Shampoo", new BigDecimal(90.00) , new StringBuilder("Shampoo anticaspa"));
 		
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
@@ -124,8 +124,8 @@ public class DBServiceImpl implements DBService {
 		estadoService.salvarTodos(Arrays.asList(est1, est2, est3));
 		cidadeService.salvarTodos(Arrays.asList(c1, c2, c3, c4));
 		
-		Cliente cli1 = new Cliente(null, "Marcos Silva", "marcosradix@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, bCryptPasswordEncoder.encode("1234567890"));
-		Cliente cli2 = new Cliente(null, "Marcos Ferreira", "marcosradix@outlook.com", "04127612380", TipoCliente.PESSOA_FISICA, bCryptPasswordEncoder.encode("1234567890"));
+		Cliente cli1 = new Cliente(null, "Helena Silva", "marcosradix@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, bCryptPasswordEncoder.encode("1234567890"));
+		Cliente cli2 = new Cliente(null, "Megue Ferreira", "marcosradix@outlook.com", "04127612380", TipoCliente.PESSOA_FISICA, bCryptPasswordEncoder.encode("1234567890"));
 		cli2.getTelefones().addAll(Arrays.asList("85999575446", "85985386973"));
 		cli2.addPerfil(Perfil.ADMIN);
 		

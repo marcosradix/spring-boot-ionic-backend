@@ -27,6 +27,7 @@ public class Produto implements Serializable {
 	private Integer id;
 	private String nome;
 	private BigDecimal preco;
+	private StringBuilder descricao;
 	
 	
 	// 'produto_id' chave dessa tabela, chave 'categoria_id' da outra tabela
@@ -57,6 +58,14 @@ public class Produto implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+	}
+	
+	public Produto(Integer id, String nome, BigDecimal preco, StringBuilder descricao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.preco = preco;
+		this.descricao = descricao;
 	}
 
 	public Integer getId() {
@@ -97,6 +106,15 @@ public class Produto implements Serializable {
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
 	}
+	
+	public StringBuilder getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(StringBuilder descricao) {
+		this.descricao = descricao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -124,8 +142,24 @@ public class Produto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", categorias=" + categorias + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Produto [id=");
+		builder.append(id);
+		builder.append(", nome=");
+		builder.append(nome);
+		builder.append(", preco=");
+		builder.append(preco);
+		builder.append(", descricao=");
+		builder.append(descricao);
+		builder.append(", categorias=");
+		builder.append(categorias);
+		builder.append(", itens=");
+		builder.append(itens);
+		builder.append("]");
+		return builder.toString();
 	}
+
+	
 
 	
 	
